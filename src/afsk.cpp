@@ -30,9 +30,8 @@
 
 #include "config.h"
 #include "afsk_avr.h"
-#include "afsk_pic32.h"
 #include "pin.h"
-#include "radio_hx1.h"
+#include "Radio_UV5R.h"
 #if (ARDUINO + 1) >= 100
 #  include <Arduino.h>
 #else
@@ -64,7 +63,7 @@ volatile static uint8_t sample_fifo_tail = 0;
 volatile static uint32_t sample_overruns = 0;
 
 // The radio (class defined in config.h)
-static RadioHx1 radio;
+static RadioUV5R radio;
 
 volatile static unsigned int afsk_packet_size = 0;
 volatile static const uint8_t *afsk_packet;
