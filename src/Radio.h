@@ -8,10 +8,7 @@ public:
 	Radio(HardwareSerial *serial, int restart_time);
 	void begin();
 	void tick();
-	int enable();
-	void disable();
 
-	bool transmit(String *packet);
-	String to_AX25(String *data);
+//	bool transmit(String *packet);
 	int systems_check();
 };

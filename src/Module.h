@@ -16,9 +16,9 @@ public:
 	virtual void begin() = 0;
 	// Called periodically in loop()
 	virtual void tick() = 0;
-	// Enable the module, renable power
+	// Enable the module, renable power // currently not implemented
 	virtual int enable() = 0;
-	// Disable the module, powersaving mode
+	// Disable the module, powersaving mode // currently not implemented
 	virtual void disable() = 0;
 };
 

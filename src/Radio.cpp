@@ -6,34 +6,19 @@ Radio::Radio(HardwareSerial *ser, int restart_time):radio_comms(ser) {
 }
 
 void Radio::begin() {
+	RadioUV5R.setup();
 // Set transmission time slot
 }
 
 void Radio::tick() {
-        get_pos();
         aprs_send();
 }
 
-int Radio::enable() {
-	//PD1
-	return restart_time_out;
-}
-
-void Radio::disable() {
-	//PD0
-}
-
-
-bool Radio::transmit(String * packet) {
+//bool Radio::transmit(String * packet) {
 	//PTT to low
 	//tx data over uart
-	return true;
-}
-
-String Radio::to_AX25(String * data) {
-	//encode data into packet
-	return " ";
-}
+//	return true;
+//}
 
 int Radio::systems_check() {
 	int check_result = 1337;
