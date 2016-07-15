@@ -6,9 +6,12 @@ Radio::Radio(HardwareSerial *ser, int restart_time):radio_comms(ser) {
 }
 
 void Radio::begin() {
+// Set transmission time slot
 }
 
 void Radio::tick() {
+        get_pos();
+        aprs_send();
 }
 
 int Radio::enable() {
