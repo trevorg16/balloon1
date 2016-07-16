@@ -30,6 +30,7 @@
 
 #include "config.h"
 #include "afsk_avr.h"
+#include "afsk_arm.h"
 #include "pin.h"
 #include "Radio_UV5R.h"
 #if (ARDUINO + 1) >= 100

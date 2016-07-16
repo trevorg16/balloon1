@@ -14,13 +14,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#ifdef AVR
+#ifndef AVR
 
-#include <avr/io.h>
+#include <avr.io.h>
 #include <avr/pgmspace.h>
 #include "config.h"
-#include "afsk_avr.h"
-
+#include "afsk_arm.h"
 
 
 // Module consts
