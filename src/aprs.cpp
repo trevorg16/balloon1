@@ -19,7 +19,24 @@
 #include "ax25.h"
 #include "gps.h"
 #include "aprs.h"
-#include "sensors_avr.h"
+//#include "sensors_avr.h"
+//Instead:
+unsigned long sensors_aref() {
+  return 0;
+}
+long sensors_internal_temp() {
+  return 0;
+}
+int sensors_int_lm60() {
+  return 0;
+}
+int sensors_ext_lm60() {
+  return 0;
+}
+int sensors_vin() {
+  return 0;
+}
+
 #include <stdio.h>
 #include <stdlib.h>
 #if (ARDUINO + 1) >= 100
@@ -39,7 +56,7 @@ float meters_to_feet(float m)
 void aprs_send()
 {
   char temp[12];                   // Temperature (int/ext)
-  const struct s_address addresses[] = { 
+  const struct s_address addresses[] = {
     {D_CALLSIGN, D_CALLSIGN_ID},  // Destination callsign
     {S_CALLSIGN, S_CALLSIGN_ID},  // Source callsign (-11 = balloon, -9 = car)
 #ifdef DIGI_PATH1
@@ -59,7 +76,7 @@ void aprs_send()
   ax25_send_byte('/');                // Symbol table
   ax25_send_string(gps_aprs_lon);     // Lon: 000deg and 25.80 min
   ax25_send_byte('O');                // Symbol: O=balloon, -=QTH
-  snprintf(temp, 4, "%03d", (int)(gps_course + 0.5)); 
+  snprintf(temp, 4, "%03d", (int)(gps_course + 0.5));
   ax25_send_string(temp);             // Course (degrees)
   ax25_send_byte('/');                // and
   snprintf(temp, 4, "%03d", (int)(gps_speed + 0.5));

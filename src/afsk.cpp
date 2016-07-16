@@ -21,7 +21,7 @@
  * http://www.arduino.cc/playground/Code/PCMAudio
  *
  * Ken Shirriff for his Great article on PWM:
- * http://arcfn.com/2009/07/secrets-of-arduino-pwm.html 
+ * http://arcfn.com/2009/07/secrets-of-arduino-pwm.html
  *
  * The large group of people who created the free AVR tools.
  * Documentation on interrupts:
@@ -44,7 +44,7 @@
 // The actual baudrate after rounding errors will be:
 // PLAYBACK_RATE / (integer_part_of((PLAYBACK_RATE * 256) / BAUD_RATE) / 256)
 static const uint16_t BAUD_RATE       = 1200;
-static const uint16_t SAMPLES_PER_BAUD = ((uint32_t)PLAYBACK_RATE << 8) / BAUD_RATE;  // Fixed point 8.8
+static const uint16_t SAMPLES_PER_BAUD = ((uint32_t)PLAYBACK_RATE << 8) / BAUD_RATE;  // Fixed point 8.ATE
 static const uint16_t PHASE_DELTA_1200 = (((TABLE_SIZE * 1200UL) << 7) / PLAYBACK_RATE); // Fixed point 9.7
 static const uint16_t PHASE_DELTA_2200 = (((TABLE_SIZE * 2200UL) << 7) / PLAYBACK_RATE);
 static const uint8_t SAMPLE_FIFO_SIZE = 32;
@@ -102,14 +102,14 @@ inline static void afsk_fifo_in(uint8_t s)
   sample_fifo[sample_fifo_head] = s;
   sample_fifo_head = (sample_fifo_head + 1) % SAMPLE_FIFO_SIZE;
 }
- 
+
 inline static void afsk_fifo_in_safe(uint8_t s)
 {
   noInterrupts();
   afsk_fifo_in(s);
   interrupts();
 }
-  
+
 inline static uint8_t afsk_fifo_out()
 {
   uint8_t s = sample_fifo[sample_fifo_tail];
@@ -124,7 +124,7 @@ inline static uint8_t afsk_fifo_out_safe()
   interrupts();
   return b;
 }
-  
+
 
 // Exported functions
 
@@ -156,7 +156,7 @@ void afsk_start()
 
   // Key the radio
   radio.ptt_on();
-  
+
   // Start transmission
   afsk_timer_start();
 }
@@ -190,7 +190,7 @@ bool afsk_flush()
         phase_delta ^= (PHASE_DELTA_1200 ^ PHASE_DELTA_2200);
       }
     }
-      
+
     phase += phase_delta;
     uint8_t s = afsk_read_sample((phase >> 7) & (TABLE_SIZE - 1));
 
@@ -198,7 +198,7 @@ bool afsk_flush()
     Serial.print((uint16_t)s);
     Serial.print('/');
 #endif
-  
+
 #if PRE_EMPHASIS == 1
     if (phase_delta == PHASE_DELTA_1200)
       s = s / 2 + 64;
@@ -210,7 +210,7 @@ bool afsk_flush()
 #endif
 
     afsk_fifo_in_safe(s);
-  
+
     current_sample_in_baud += (1 << 8);
     if (current_sample_in_baud >= SAMPLES_PER_BAUD) {
 #ifdef DEBUG_AFSK
