@@ -64,7 +64,6 @@ void setup()
 #ifdef DEBUG_RESET
   Serial.println("RESET");
 #endif
-
   afsk_setup();
 
 #ifdef DEBUG_SENS
@@ -75,13 +74,13 @@ void setup()
   Serial.print(", Vin=");
   Serial.println(sensors_vin());
 #endif
-
+/*
   // Do not start until we get a valid time reference
   // for slotted transmissions.
   if (APRS_SLOT >= 0) {
     do {
       while (! Serial.available())
-       int a = 4;
+
     } while (! gps_decode(Serial.read()));
       next_aprs = millis() + 1000 *
       (APRS_PERIOD - (gps_seconds + APRS_PERIOD - APRS_SLOT) % APRS_PERIOD);
@@ -89,6 +88,8 @@ void setup()
   else {
     next_aprs = millis();
   }
+*/
+  next_aprs = millis() + 1000 * APRS_PERIOD;
   // TODO: beep while we get a fix, maybe indicating the number of
   // visible satellites by a series of short beeps?
 }
@@ -105,6 +106,7 @@ void get_pos()
 
 
 }
+
 
 void loop()
 {

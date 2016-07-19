@@ -35,11 +35,11 @@ void RadioUV5R::setup()
 
 void RadioUV5R::ptt_on()
 {
-  pin_write(PTT_PIN, HIGH);
+  pin_write(PTT_PIN, LOW);
   delay(25);   // Should be more than we need, the HX1 takes 5 ms from PTT to full RF, give it 25
 }
 
 void RadioUV5R::ptt_off()
 {
-  pin_write(PTT_PIN, LOW);
+  pin_write(PTT_PIN, HIGH);
 }

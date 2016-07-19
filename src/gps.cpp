@@ -59,7 +59,7 @@ static const t_nmea_parser gga_parsers[] = {
   NULL,             // N/S
   NULL,             // Longitude
   NULL,             // E/W
-  NULL,             // Fix quality 
+  NULL,             // Fix quality
   NULL,             // Number of satellites
   NULL,             // Horizontal dilution of position
   parse_altitude,   // Altitude
@@ -112,8 +112,8 @@ static float new_altitude;
 // Public (extern) variables, readable from other modules
 char gps_time[7];       // HHMMSS
 uint32_t gps_seconds = 0;   // seconds after midnight
-float gps_lat = 0;
-float gps_lon = 0;
+float gps_lat = 49.2778;
+float gps_lon = -122.9141;
 char gps_aprs_lat[9];
 char gps_aprs_lon[10];
 float gps_course = 0;
@@ -121,7 +121,7 @@ float gps_speed = 0;
 float gps_altitude = 0;
 
 // Module functions
-unsigned char from_hex(char a) 
+unsigned char from_hex(char a)
 {
   if (a >= 'A' && a <= 'F')
     return a - 'A' + 10;
@@ -150,8 +150,8 @@ void parse_time(const char *token)
   strncpy(new_time, token, 6);
   // Terminate string
   new_time[6] = '\0';
-  
-  new_seconds = 
+
+  new_seconds =
     ((new_time[0] - '0') * 10 + (new_time[1] - '0')) * 60 * 60UL +
     ((new_time[2] - '0') * 10 + (new_time[3] - '0')) * 60 +
     ((new_time[4] - '0') * 10 + (new_time[5] - '0'));
@@ -310,7 +310,7 @@ bool gps_decode(char c)
       num_tokens = 0;
       sentence_type = SENTENCE_UNK;
       break;
-    
+
     case '*':
       // Handle as ',', but prepares to receive checksum (ie. do not break)
       at_checksum = true;
@@ -364,4 +364,3 @@ bool gps_decode(char c)
   }
   return ret;
 }
-
